@@ -1,42 +1,80 @@
-import React from 'react';
-import { ShoppingBag, Menu } from 'lucide-react';
+"use client";
 
-const Navbar = () => (
-  <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div className="absolute inset-0 bg-[#FDFBF7]/80 backdrop-blur-md border-b border-stone-200/50" />
-    <div className="relative max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      {/* Mobile Menu */}
-      <div className="md:hidden">
-        <Menu color="#2F3B32" />
-      </div>
+import React, { useState } from 'react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
+import { useCartStore } from '../../lib/cartStore';
 
-      {/* Brand Logo */}
-      <div className="flex-1 text-center md:text-left">
-        <span className="font-serif text-3xl tracking-tight font-medium" style={{ color: '#2F3B32' }}>
-          Intended
-        </span>
-      </div>
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-      {/* Desktop Links */}
-      <div className="hidden md:flex items-center space-x-12">
-        {['Shop', 'Our Story', 'Ingredients', 'Journal'].map((link) => (
-          <a key={link} href="#" className="text-sm font-medium hover:opacity-60 transition-opacity" style={{ color: '#2F3B32' }}>
-            {link}
-          </a>
-        ))}
-      </div>
+  // Get cart count from Zustand store
+  const cartCount = useCartStore((state) => state.items.length);
 
-      {/* Cart Actions */}
-      <div className="flex items-center justify-end md:ml-12">
-        <button className="relative p-2 hover:bg-stone-100 rounded-full transition-colors">
-          <ShoppingBag size={22} color="#2F3B32" />
-          <span className="absolute top-0 right-0 h-4 w-4 rounded-full text-[10px] font-bold text-white flex items-center justify-center" style={{ backgroundColor: '#7D3E42' }}>
-            1
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FDFBF7]/60 backdrop-blur-md py-4 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
+        {/* Mobile: Hamburger */}
+        <div className="md:hidden">
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[#2F3B32] hover:bg-stone-100 rounded-full transition-colors">
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <span className="font-serif text-2xl font-bold tracking-tight text-[#2F3B32]">
+            Intended
           </span>
-        </button>
+        </div>
+
+        {/* Desktop Links (Centered) */}
+        <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+          {[{ label: 'Our Story', href: '#' }, { label: 'Products', href: '#' }].map((item) => (
+            <a key={item.label} href={item.href} className="text-sm font-medium text-[#2F3B32]/70 hover:text-[#2F3B32] transition-colors">
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Desktop Right: Cart Button */}
+        <div className="hidden md:flex items-center">
+          <button className="relative flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#2F3B32] text-[#2F3B32] font-medium text-sm hover:bg-[#2F3B32] hover:text-white transition-all duration-300">
+            <ShoppingBag size={20} />
+            Cart
+            {/* Dynamic cart count badge */}
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#7D3E42] text-white text-xs rounded-full px-2 py-0.5 font-bold">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Right: Cart Icon */}
+        <div className="md:hidden">
+          <div className="relative">
+            <ShoppingBag size={24} className="text-[#2F3B32]" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#7D3E42] text-white text-xs rounded-full px-2 py-0.5 font-bold">
+                {cartCount}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-  </nav>
-);
+
+      {/* Mobile Menu Dropdown */}
+      {isOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#FDFBF7] border-b border-stone-100 p-6 space-y-4 shadow-xl">
+          {[{ label: 'Our Story', href: '#' }, { label: 'Products', href: '#' }].map((item) => (
+            <a key={item.label} href={item.href} className="block text-xl font-serif text-[#2F3B32] py-2 border-b border-stone-100 last:border-0">
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+};
 
 export default Navbar;

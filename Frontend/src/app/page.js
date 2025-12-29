@@ -1,17 +1,19 @@
-import Navbar from "../components/layout/Navbar";
-import Hero from "../components/home/Hero";
-import FeaturesSection from "../components/home/FeaturesSection";
-import Footer from "../components/layout/Footer";
+"use client";
+
+import React from 'react';
+
+import Navbar from '../components/layout/Navbar';
+import Hero from '../components/home/Hero';
+import CardSection from '../components/layout/CardSection';
+import Footer from '../components/layout/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-sans bg-zinc-50">
+    <main className="bg-[#FDFBF7] min-h-screen selection:bg-[#7D3E42] selection:text-white font-sans">
       <Navbar />
-      <main>
-        <Hero />
-        <FeaturesSection />
-      </main>
+      <Hero />
+      <CardSection />
       <Footer />
-    </div>
+    </main>
   );
 }
