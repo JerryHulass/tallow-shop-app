@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Prevent large deleted images from being tracked again
+public/images/tallow1(5).png
+public/images/tallow2.png
+
 # debug
 npm-debug.log*
 yarn-debug.log*
