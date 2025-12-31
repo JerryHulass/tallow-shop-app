@@ -80,7 +80,7 @@ const App = () => {
       )}
 
       {/* Hero Section */}
-      <main className="flex-grow flex flex-col items-center pt-16 md:pt-24 px-4 relative">
+      <main className="grow flex flex-col items-center pt-16 md:pt-24 px-4 relative">
         
         {/* TEXT CONTENT LAYER (z-0: Behind image) */}
         <div className="relative z-0 flex flex-col items-center w-full max-w-4xl mx-auto">
@@ -92,7 +92,7 @@ const App = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-5xl md:text-[5.5rem] text-center text-gray-900 mb-8 leading-[1] font-serif tracking-tight"
+            className="text-5xl md:text-[5.5rem] text-center text-gray-900 mb-8 leading-none font-serif tracking-tight"
           >
             Made How God, <br/>
             <span className="text-gray-400">Intended To Be</span>
