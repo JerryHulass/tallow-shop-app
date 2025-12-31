@@ -11,8 +11,8 @@ const CardSection = () => {
   // Each card will have a different scale and range for effect
   return (
     <section ref={sectionRef} className="w-full min-h-screen py-16 bg-[#FDFBF7] flex flex-col items-center">
-      <h2 className="text-3xl md:text-5xl font-serif text-[#2F3B32] text-center">Featured Cards</h2>
-      <div className="relative w-full flex flex-col gap-0">
+      <h2 className="text-3xl md:text-5xl font-serif text-[#2F3B32] text-center">Featured Products</h2>
+      <div className="relative w-full flex flex-col gap-0 sm:mt-0">
         {cardsList.map((card, i) => {
           // Each card gets a different scale and range for a stacked effect
           const range = [0, 1];

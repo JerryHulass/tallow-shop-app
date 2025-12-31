@@ -10,9 +10,10 @@ const App = () => {
   // 1. Setup Framer Motion Scroll Hooks
   const { scrollY } = useScroll();
   
-  // 2. Map scroll position (0 to 600px) to a negative Y offset (0 to -250px)
+  // 2. Map scroll position (0 to 600px) to a negative Y offset (0 to -100px)
   // This causes the image to move UP faster than the user scrolls, creating the overlap effect.
   const yRange = useTransform(scrollY, [0, 600], [0, -250]);
+  const imageY = useTransform(scrollY, [0, 600], [0, -100]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-gray-900 font-sans selection:bg-gray-100 overflow-x-hidden">
@@ -93,8 +94,8 @@ const App = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-5xl md:text-[5.5rem] text-center text-gray-900 mb-8 leading-[1] font-serif tracking-tight"
           >
-            Built To Buy, <br/>
-            <span className="text-gray-400">Designed To Delight</span>
+            Made How God, <br/>
+            <span className="text-gray-400">Intended To Be</span>
           </motion.h1>
 
           {/* Subheadline Animation */}
@@ -114,18 +115,30 @@ const App = () => {
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="inline-flex items-center gap-2 bg-[#1a1a1a] text-white px-9 py-4 rounded-full font-medium shadow-xl shadow-black/10 group mb-20 z-10 relative"
+            className="inline-flex items-center gap-2 bg-[#1a1a1a] text-white px-9 py-4 rounded-full font-medium shadow-xl shadow-black/10 group mb-2 z-10 relative"
           >
             Store
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.button>
+        </div>
+        <div>
+          <motion.div 
+            style={{ y: imageY }}
+            className="w-full max-w-4xl mt-12 md:mt-16 lg:mt-20 px-4 z-10"
+          >
+            <img 
+              src="/images/tallow1(2).png" 
+              alt="Tallow Product" 
+              className="w-full sm:w-3/5 h-auto rounded-3xl shadow-2xl shadow-black/20 mx-auto"
+            />
+          </motion.div>
         </div>
 
 
       </main>
 
       {/* Content Section to allow scrolling */}
-      <section className="w-full bg-[#FDFBF7] py-16 px-6 relative z-10">
+      <section className="w-full bg-[#FDFBF7] py-0 px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -135,7 +148,7 @@ const App = () => {
             >
               <span className="px-4 py-1 rounded-full border border-gray-200 text-sm font-medium text-gray-600 mb-6 inline-block">About us</span>
               <h2 className="text-3xl md:text-5xl font-serif text-gray-900 leading-tight">
-                "At our store, we believe that good design should be both beautiful and practical."
+                "Zero additives. Zero confusion. Just pure, intentional nourishment."
               </h2>
             </motion.div>
         </div>
